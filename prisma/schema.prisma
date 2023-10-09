@@ -1,6 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// prisma/schema.prisma
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,15 +13,17 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  name      String
-  password  String
+  id       Int    @id @default(autoincrement())
+  name     String
+  password String
 }
 
 model Dados {
-  id        Int     @id @default(autoincrement())
-  
+  idConta    Int    @id @default(autoincrement())
+  saldoConta BigInt
+  status     String
 }
+
 
 // npx prisma migrate dev
 // /\ -> (npx prisma generate && npx prisma db:push)
