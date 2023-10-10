@@ -6,4 +6,4 @@ export function getUsers() {
       posts: true,
     },
   });
-}
+} 

@@ -1,6 +1,6 @@
 "use client";
-
 import React, { useState } from "react";
+
 
 export default function CadastroForm() {
   const [nome, setNome] = useState("");
@@ -9,25 +9,20 @@ export default function CadastroForm() {
 
   function pegaNome(ev: React.ChangeEvent<HTMLInputElement>) {
     setNome(ev.target.value);
-  };
+  }
   function pegaSenha(ev: React.ChangeEvent<HTMLInputElement>) {
     setSenha(ev.target.value);
-  };
+  }
 
   function enviar(ev: React.FormEvent) {
-    if (nome == "" || senha == "") {
-      alert("Nome ou senha não foram informados.");
-      ev.preventDefault();
-    } else {
-      console.log("Nome do usuario: ", nome);
-      console.log("Senha criada: ", senha);
+    console.log("Nome do usuario: ", nome);
+    console.log("Senha criada: ", senha);
 
-      ev.preventDefault();
+    ev.preventDefault();
 
-      setNome("");
-      setSenha("");
-    }
-  };
+    setNome("");
+    setSenha("");
+  }
 
   function apareceSenha() {
     if (mostrar === "password") {
@@ -35,7 +30,7 @@ export default function CadastroForm() {
     } else {
       setMostrar("password");
     }
-  };
+  }
 
   return (
     <div className="bg-gradient-to-r from bg-slate-800  ">
@@ -55,7 +50,7 @@ export default function CadastroForm() {
                     className="rounded p-1 text-black mb-2"
                     type="text"
                     placeholder="Nome completo"
-                  />
+                    required />
                 </td>
               </tr>
               <tr>
@@ -66,7 +61,7 @@ export default function CadastroForm() {
                     className="rounded p-1 text-black mr-2"
                     type={mostrar}
                     placeholder="Senha"
-                  />
+                    required />
                 </td>
                 <td>
                   <button type="button" onClick={apareceSenha}>
