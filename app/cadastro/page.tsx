@@ -1,5 +1,5 @@
 import React from 'react';
-import CadastroForm from './components/CadastroForm';
+import CadastroForm from "./components/cadastroForm";
 
 
 type LoginPageProps = {};

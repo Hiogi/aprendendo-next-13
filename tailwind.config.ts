@@ -15,6 +15,11 @@ const config: Config = {
       },
       width: {
         'inputWidth' : '20px'
+      },
+      colors: {
+        'home'  : '#011f4b',
+        'menu'  : '#313338',
+        'texto' : '#7f878e'
       }
     },
   },

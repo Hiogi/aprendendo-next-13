@@ -6,6 +6,8 @@ export default function CadastroForm() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
   const [mostrar, setMostrar] = useState("password");
+  const [CPF, setCPF] = useState("");
+  
 
   function pegaNome(ev: React.ChangeEvent<HTMLInputElement>) {
     setNome(ev.target.value);
@@ -13,15 +15,24 @@ export default function CadastroForm() {
   function pegaSenha(ev: React.ChangeEvent<HTMLInputElement>) {
     setSenha(ev.target.value);
   }
+  function pegaCPF(ev: React.ChangeEvent<HTMLInputElement>) {
+    setCPF(ev.target.value);
+  }
 
   function enviar(ev: React.FormEvent) {
+    
+    if(isValidCPF(CPF) === false){
+      return alert("cpf inválido")
+    }
     console.log("Nome do usuario: ", nome);
     console.log("Senha criada: ", senha);
+    console.log("cpf registrado: ", CPF)
 
     ev.preventDefault();
 
     setNome("");
     setSenha("");
+    setCPF("");
   }
 
   function apareceSenha() {
@@ -31,6 +42,23 @@ export default function CadastroForm() {
       setMostrar("password");
     }
   }
+
+  function isValidCPF(CPF: string) {
+    if (typeof CPF !== 'string') {
+    return false;
+  }
+   
+  CPF = CPF.replace(/[^\d]+/g, '');
+  
+  if (CPF.length !== 11 || !!CPF.match(/(\d)\1{10}/)) {
+    return false;
+  }
+
+  const values = CPF.split('').map(el => +el);
+  const rest = (count: any) => (values.slice(0, count-12).reduce( (soma, el, index) => (soma + el * (count-index)), 0 )*10) % 11 % 10;
+
+  return rest(10) === values[9] && rest(11) === values[10];
+}
 
   return (
     <div className="bg-gradient-to-r from bg-slate-800  ">
@@ -50,6 +78,17 @@ export default function CadastroForm() {
                     className="rounded p-1 text-black mb-2"
                     type="text"
                     placeholder="Nome completo"
+                    required />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    onChange={pegaCPF}
+                    value={CPF}
+                    className="rounded p-1 text-black mb-2"
+                    type="text"
+                    placeholder="CPF"
                     required />
                 </td>
               </tr>
