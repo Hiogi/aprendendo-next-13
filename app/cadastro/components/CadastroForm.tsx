@@ -1,4 +1,5 @@
 "use client";
+import { Utils } from "@/lib/utils";
 import React, { useState } from "react";
 
 
@@ -6,7 +7,7 @@ export default function CadastroForm() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
   const [mostrar, setMostrar] = useState("password");
-  const [CPF, setCPF] = useState("");
+  const [cpf, setCPF] = useState("");
   
 
   function pegaNome(ev: React.ChangeEvent<HTMLInputElement>) {
@@ -19,20 +20,39 @@ export default function CadastroForm() {
     setCPF(ev.target.value);
   }
 
-  function enviar(ev: React.FormEvent) {
-    
-    if(isValidCPF(CPF) === false){
-      return alert("cpf inválido")
+  async function enviar(ev: React.FormEvent) {
+
+    if(isValidCPF(cpf) === false){
+      // return alert("cpf inválido")
     }
+
     console.log("Nome do usuario: ", nome);
     console.log("Senha criada: ", senha);
-    console.log("cpf registrado: ", CPF)
+    console.log("cpf registrado: ", cpf)
+
+    if (!nome) {
+      // erro
+      return;
+    }
 
     ev.preventDefault();
 
     setNome("");
     setSenha("");
     setCPF("");
+
+    const response = await Utils.post('/api/users', {
+      nome: nome,
+      senha: senha,
+      cpf: cpf,
+    });
+
+    if (response.ok) {
+      alert('Usuário cadastrado com sucesso');
+    }
+    else {
+      alert("eerwer");
+    }
   }
 
   function apareceSenha() {
@@ -85,7 +105,7 @@ export default function CadastroForm() {
                 <td>
                   <input
                     onChange={pegaCPF}
-                    value={CPF}
+                    value={cpf}
                     className="rounded p-1 text-black mb-2"
                     type="text"
                     placeholder="CPF"
