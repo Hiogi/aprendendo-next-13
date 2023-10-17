@@ -85,7 +85,7 @@ export default function CadastroForm() {
       <div className="h-screen flex items-center justify-center">
         <form
           onSubmit={enviar}
-          className="border-2 border-black rounded p-10 flex flex-col"
+          className="border-2 border-black bg-home rounded p-10 flex flex-col"
         >
           <div className="mb-2 text-white max-w-inputWidth">Cadastro</div>
           <table>
