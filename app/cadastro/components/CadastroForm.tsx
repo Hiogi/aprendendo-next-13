@@ -23,7 +23,7 @@ export default function CadastroForm() {
   async function enviar(ev: React.FormEvent) {
 
     if(isValidCPF(cpf) === false){
-      // return alert("cpf inválido")
+      return alert("cpf inválido")
     }
 
     console.log("Nome do usuario: ", nome);
