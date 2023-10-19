@@ -12,35 +12,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         Int    @id @default(autoincrement())
-  name       String
-  cpf        String @unique
-  password   String
-  saldoConta Decimal
-  transferenciasOrigem Transferencia[] @relation("contaOrigem")
-  transferenciasDestino Transferencia[] @relation("contaDestino")
+model Cliente {
+  id              Int    @id @default(autoincrement())
+  cpf             String @unique
+  name            String
+  contas          Contas[]
 }
 
-model Transferencia {
-  id              Int    @id @default(autoincrement())
-  valor           Decimal
-  contaOrigemId   Int 
-  contaDestinoId  Int
-  contaOrigem     User @relation("contaOrigem", fields: [contaDestinoId], references: [id])
-  contaDestino    User @relation("contaDestino", fields: [contaOrigemId], references: [id])
+model Contas {
+  id              Int @id @default(autoincrement())
+  idCliente       Int
+  contaClienteId  Cliente @relation(fields: [idCliente], references: [id])
+  numeroConta     String
+  tipo            TipoConta
+  
 }
+
+model transacao {
+  idTransacao    Int @id @default(autoincrement())
+  data           DateTime
+  contasId       Contas @relation(fields: [data], references: [id])
+}
+
+enum TipoConta {
+  CORRENTE 
+  POUPANCA
+
+}
+
+// enum TipoTransacao {
+//   DEPOSITO
+//   SAQUE
+// }
+
+// model Transferencia {
+//   id              Int    @id @default(autoincrement())
+//   valor           Decimal
+//   contaOrigemId   Int 
+//   contaDestinoId  Int
+//   contaOrigem     User @relation("contaOrigem", fields: [contaDestinoId], references: [id])
+//   contaDestino    User @relation("contaDestino", fields: [contaOrigemId], references: [id])
+// }
 
 // model Transacao {
   // tipo
   // valor
   // data
 // }
-
-enum TipoTransacao {
-  DEPOSITO
-  SAQUE
-}
 
 // npx prisma migrate dev
 // /\ -> (npx prisma generate && npx prisma db:push)

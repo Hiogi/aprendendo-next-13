@@ -43,7 +43,6 @@ export default function CadastroForm() {
 
     const response = await Utils.post('/api/users', {
       nome: nome,
-      senha: senha,
       cpf: cpf,
     });
 
