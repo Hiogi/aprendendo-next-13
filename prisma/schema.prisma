@@ -13,31 +13,53 @@ datasource db {
 }
 
 model Cliente {
-  id              Int    @id @default(autoincrement())
-  cpf             String @unique
-  name            String
-  contas          Contas[]
+  id     Int     @id @default(autoincrement())
+  cpf    String  @unique
+  name   String
+  contas Conta[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Clientes")
 }
 
-model Contas {
-  id              Int @id @default(autoincrement())
-  idCliente       Int
-  contaClienteId  Cliente @relation(fields: [idCliente], references: [id])
-  numeroConta     String
-  tipo            TipoConta
-  
+model Conta {
+  id          Int    @id @default(autoincrement())
+  numeroConta String
+  tipoContaId Int
+  saldoConta  Float
+  clienteId   Int
+
+  tipoConta TipoConta   @relation(fields: [tipoContaId], references: [id])
+  client    Cliente     @relation(fields: [clienteId], references: [id])
+  transacao Transacao[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Contas")
 }
 
-model transacao {
-  idTransacao    Int @id @default(autoincrement())
-  data           DateTime
-  contasId       Contas @relation(fields: [data], references: [id])
+model Transacao {
+  id      Int   @id @default(autoincrement())
+  contaId Int
+  conta   Conta @relation(fields: [contaId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Transacoes")
 }
 
-enum TipoConta {
-  CORRENTE 
-  POUPANCA
+model TipoConta {
+  id        Int    @id @default(autoincrement())
+  descricao String
 
+  Conta Conta[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // enum TipoTransacao {
@@ -55,9 +77,9 @@ enum TipoConta {
 // }
 
 // model Transacao {
-  // tipo
-  // valor
-  // data
+// tipo
+// valor
+// data
 // }
 
 // npx prisma migrate dev

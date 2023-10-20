@@ -2,13 +2,12 @@
 import { Utils } from "@/lib/utils";
 import React, { useState } from "react";
 
-
 export default function CadastroForm() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
   const [mostrar, setMostrar] = useState("password");
   const [cpf, setCPF] = useState("");
-  
+  const [conta, setConta] = useState("");
 
   function pegaNome(ev: React.ChangeEvent<HTMLInputElement>) {
     setNome(ev.target.value);
@@ -21,14 +20,13 @@ export default function CadastroForm() {
   }
 
   async function enviar(ev: React.FormEvent) {
-
-    if(isValidCPF(cpf) === false){
-      return alert("cpf inválido")
+    if (isValidCPF(cpf) === false) {
+      return alert("cpf inválido");
     }
 
     console.log("Nome do usuario: ", nome);
     console.log("Senha criada: ", senha);
-    console.log("cpf registrado: ", cpf)
+    console.log("cpf registrado: ", cpf);
 
     if (!nome) {
       // erro
@@ -41,16 +39,17 @@ export default function CadastroForm() {
     setSenha("");
     setCPF("");
 
-    const response = await Utils.post('/api/users', {
+    const response = await Utils.post("/api/users", {
       nome: nome,
       cpf: cpf,
     });
 
     if (response.ok) {
-      alert('Usuário cadastrado com sucesso');
-    }
-    else {
-      alert("eerwer");
+
+      alert("Usuário cadastrado com sucesso");
+    } else {
+
+      alert("error");
     }
   }
 
@@ -63,21 +62,27 @@ export default function CadastroForm() {
   }
 
   function isValidCPF(CPF: string) {
-    if (typeof CPF !== 'string') {
-    return false;
-  }
-   
-  CPF = CPF.replace(/[^\d]+/g, '');
-  
-  if (CPF.length !== 11 || !!CPF.match(/(\d)\1{10}/)) {
-    return false;
-  }
+    if (typeof CPF !== "string") {
+      return false;
+    }
 
-  const values = CPF.split('').map(el => +el);
-  const rest = (count: any) => (values.slice(0, count-12).reduce( (soma, el, index) => (soma + el * (count-index)), 0 )*10) % 11 % 10;
+    CPF = CPF.replace(/[^\d]+/g, "");
 
-  return rest(10) === values[9] && rest(11) === values[10];
-}
+    if (CPF.length !== 11 || !!CPF.match(/(\d)\1{10}/)) {
+      return false;
+    }
+
+    const values = CPF.split("").map((el) => +el);
+    const rest = (count: any) =>
+      ((values
+        .slice(0, count - 12)
+        .reduce((soma, el, index) => soma + el * (count - index), 0) *
+        10) %
+        11) %
+      10;
+
+    return rest(10) === values[9] && rest(11) === values[10];
+  }
 
   return (
     <div className="bg-gradient-to-r from bg-slate-800  ">
@@ -97,7 +102,8 @@ export default function CadastroForm() {
                     className="rounded p-1 text-black mb-2"
                     type="text"
                     placeholder="Nome completo"
-                    required />
+                    required
+                  />
                 </td>
               </tr>
               <tr>
@@ -108,7 +114,8 @@ export default function CadastroForm() {
                     className="rounded p-1 text-black mb-2"
                     type="text"
                     placeholder="CPF"
-                    required />
+                    required
+                  />
                 </td>
               </tr>
               <tr>
@@ -119,7 +126,8 @@ export default function CadastroForm() {
                     className="rounded p-1 text-black mr-2"
                     type={mostrar}
                     placeholder="Senha"
-                    required />
+                    required
+                  />
                 </td>
                 <td>
                   <button type="button" onClick={apareceSenha}>
