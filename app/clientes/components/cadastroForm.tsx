@@ -1,14 +1,18 @@
 "use client";
-import { Utils } from "@/lib/utils";
+import { isValidCPF } from "@/lib/utils";
 import React, { useState } from "react";
+import { ClienteComSenha, salvarCliente } from "../services/cliente-service";
 
 export default function CadastroForm() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
   const [mostrar, setMostrar] = useState("password");
   const [cpf, setCPF] = useState("");
-  const [conta, setConta] = useState("");
+  const [verificaSenha, setVerificaSenha] = useState("");
 
+  function confirmaSenha (ev: React.ChangeEvent<HTMLInputElement>){
+    setVerificaSenha(ev.target.value)
+  }
   function pegaNome(ev: React.ChangeEvent<HTMLInputElement>) {
     setNome(ev.target.value);
   }
@@ -20,37 +24,24 @@ export default function CadastroForm() {
   }
 
   async function enviar(ev: React.FormEvent) {
-    if (isValidCPF(cpf) === false) {
-      return alert("cpf inválido");
-    }
-
-    console.log("Nome do usuario: ", nome);
-    console.log("Senha criada: ", senha);
-    console.log("cpf registrado: ", cpf);
-
-    if (!nome) {
-      // erro
-      return;
-    }
-
     ev.preventDefault();
 
-    setNome("");
-    setSenha("");
-    setCPF("");
+    let error = "";
 
-    const response = await Utils.post("/api/users", {
-      nome: nome,
-      cpf: cpf,
-    });
+    if (!isValidCPF(cpf)) error += "cpf inválido\n";
+    if (!nome) error += "informe seu nome\n";
+    if(senha != verificaSenha) error += "As senhas que vc digitou não são iguais\n"
 
-    if (response.ok) {
+    if (error === "") {
+      const data: ClienteComSenha = { name: nome, cpf: cpf, senha: senha };
 
-      alert("Usuário cadastrado com sucesso");
-    } else {
-
-      alert("error");
-    }
+      salvarCliente(data).then((response) => {
+        if (response) {
+          console.log(response);
+          alert("Cliente cadastrado");
+        } else alert("Erro ao cadastrar cliente");
+      });
+    }else alert(error)
   }
 
   function apareceSenha() {
@@ -59,29 +50,6 @@ export default function CadastroForm() {
     } else {
       setMostrar("password");
     }
-  }
-
-  function isValidCPF(CPF: string) {
-    if (typeof CPF !== "string") {
-      return false;
-    }
-
-    CPF = CPF.replace(/[^\d]+/g, "");
-
-    if (CPF.length !== 11 || !!CPF.match(/(\d)\1{10}/)) {
-      return false;
-    }
-
-    const values = CPF.split("").map((el) => +el);
-    const rest = (count: any) =>
-      ((values
-        .slice(0, count - 12)
-        .reduce((soma, el, index) => soma + el * (count - index), 0) *
-        10) %
-        11) %
-      10;
-
-    return rest(10) === values[9] && rest(11) === values[10];
   }
 
   return (
@@ -102,7 +70,7 @@ export default function CadastroForm() {
                     className="rounded p-1 text-black mb-2"
                     type="text"
                     placeholder="Nome completo"
-                    required
+
                   />
                 </td>
               </tr>
@@ -133,6 +101,18 @@ export default function CadastroForm() {
                   <button type="button" onClick={apareceSenha}>
                     👁️‍🗨️
                   </button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input
+                    onChange={confirmaSenha}
+                    value={verificaSenha}
+                    className="rounded p-1 text-black mt-2"
+                    type="password"
+                    placeholder="Confirma senha"
+                    required
+                  />
                 </td>
               </tr>
             </tbody>

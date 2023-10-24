@@ -1,16 +1,17 @@
 
 import React from 'react';
-// import LoginForm from './components/LoginForm';
+import LoginForm from './components/loginForm';
 
 
-// type LoginPageProps = {};
 
-// const LoginPage: React.FC<LoginPageProps> = (props) => {
-//   return (
-//     <>
-//       <LoginForm nomeForm='Login' />
-//     </>
-//   );
-// };
+type LoginPageProps = {};
 
-// export default React.memo(LoginPage);
+const LoginPage: React.FC<LoginPageProps> = (props) => {
+  return (
+    <>
+      <LoginForm />
+    </>
+  );
+};
+
+export default React.memo(LoginPage);

@@ -3,12 +3,12 @@ import prisma from "@/lib/prisma";
 export async function POST(request: Request) {
   const json = await request.json();
 
-  const cliente = await prisma.cliente.create({
+  const user = await prisma.user.create({
     data: {
-      cpf: json.cpf,
-      name: json.nome,
+      clienteId: json.clienteId,
+      senha: json.senha,
     },
   });
 
-  return Response.json(cliente);
+  return Response.json(user);
 }
