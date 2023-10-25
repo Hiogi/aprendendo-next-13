@@ -1,5 +1,7 @@
 "use client";
+import { Routes } from "@/lib/routes";
 import { isValidCPF } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { ClienteComSenha, salvarCliente } from "../services/cliente-service";
 
@@ -9,6 +11,8 @@ export default function CadastroForm() {
   const [mostrar, setMostrar] = useState("password");
   const [cpf, setCPF] = useState("");
   const [verificaSenha, setVerificaSenha] = useState("");
+
+  const router = useRouter();
 
   function confirmaSenha (ev: React.ChangeEvent<HTMLInputElement>){
     setVerificaSenha(ev.target.value)
@@ -28,7 +32,7 @@ export default function CadastroForm() {
 
     let error = "";
 
-    if (!isValidCPF(cpf)) error += "cpf inválido\n";
+    // if (!isValidCPF(cpf)) error += "cpf inválido\n";
     if (!nome) error += "informe seu nome\n";
     if(senha != verificaSenha) error += "As senhas que vc digitou não são iguais\n"
 
@@ -38,8 +42,8 @@ export default function CadastroForm() {
       salvarCliente(data).then((response) => {
         if (response) {
           console.log(response);
-          alert("Cliente cadastrado");
-        } else alert("Erro ao cadastrar cliente");
+          router.push(Routes.login)
+        }
       });
     }else alert(error)
   }

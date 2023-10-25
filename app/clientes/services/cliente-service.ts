@@ -8,7 +8,7 @@ export type ClienteComSenha = Prisma.ClienteUncheckedCreateInput & {
 
 export function getClientes() {
   return prisma.cliente.findMany();
-} 
+}
 
 export async function salvarCliente(cliente: ClienteComSenha) {
   const dataCliente = await 
@@ -16,8 +16,8 @@ export async function salvarCliente(cliente: ClienteComSenha) {
     .then((response) => {
       if (!response.ok) {
         // alert('Deu erro, verifique o console por enquanto.');
-        console.log(response);
-        return false;
+        console.log(response, 'to aqui ó');
+         return false;
       }
 
       return true;

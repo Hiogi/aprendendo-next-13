@@ -16,10 +16,9 @@ export async function POST(request: Request) {
     if(user?.senha === json.senha){
       return NextResponse.json(cliente);
     }
-    return NextResponse.json({ error: 'Acesso negado' }, { status: 401 })
-
+    return NextResponse.json({ error: 'Acesso negado' }, { status: 401 });
 
   }else{
-    return NextResponse.json({ error: 'Acesso negado' }, { status: 401 })
+    return NextResponse.json({ error: 'Acesso negado' }, { status: 401 });
   }
 }
