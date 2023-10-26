@@ -16,7 +16,7 @@ export async function salvarCliente(cliente: ClienteComSenha) {
     .then((response) => {
       if (!response.ok) {
         // alert('Deu erro, verifique o console por enquanto.');
-        console.log(response, 'to aqui ó');
+        console.log(response, 'to aqui');
          return false;
       }
 

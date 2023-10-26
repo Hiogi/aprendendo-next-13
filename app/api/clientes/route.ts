@@ -25,7 +25,6 @@ export async function POST(request: Request) {
     
     return Response.json(cliente);
   } catch (e) {
-    
-    return DbHelper.handleError(e);
+    return DbHelper.handleError(e); 
   }
 }
