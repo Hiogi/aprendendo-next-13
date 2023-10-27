@@ -1,15 +1,9 @@
-export function postFetch(url: string, data: any) {
+import { Method } from "@/types/types";
+
+
+export function executeFetch(url: string, method: Method, data: any) {
   return fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-}
-export function getFetch(url: string, data: any) {
-  return fetch(url, {
-    method: 'GET',
+    method: method,
     headers: {
       'Content-Type': 'application/json',
     },

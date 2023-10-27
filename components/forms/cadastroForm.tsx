@@ -3,8 +3,8 @@ import { Routes } from "@/lib/routes";
 import { isValidCPF, postFetch } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { ClienteComSenha, salvarCliente } from "../services/cliente-service";
-import { DbHelper } from '@/lib/db-helper';
+import { ClienteComSenha, salvarCliente } from "../../services/cliente.service";
+import { DbHelper } from "@/lib/db-helper";
 
 export default function CadastroForm() {
   const [nome, setNome] = useState("");
@@ -15,8 +15,8 @@ export default function CadastroForm() {
 
   const router = useRouter();
 
-  function confirmaSenha (ev: React.ChangeEvent<HTMLInputElement>){
-    setVerificaSenha(ev.target.value)
+  function confirmaSenha(ev: React.ChangeEvent<HTMLInputElement>) {
+    setVerificaSenha(ev.target.value);
   }
   function pegaNome(ev: React.ChangeEvent<HTMLInputElement>) {
     setNome(ev.target.value);
@@ -28,35 +28,28 @@ export default function CadastroForm() {
     setCPF(ev.target.value);
   }
 
-  async function enviar(ev: React.FormEvent) {
+  async function onSubmit(ev: React.FormEvent) {
     ev.preventDefault();
-    
     let error = "";
 
     if (!isValidCPF(cpf)) error += "cpf inválido\n";
     if (!nome) error += "informe seu nome\n";
-    if(senha != verificaSenha) error += "As senhas que vc digitou não são iguais\n"
+    if (senha != verificaSenha)
+      error += "As senhas que vc digitou não são iguais\n";
 
     if (error === "") {
       const data: ClienteComSenha = { name: nome, cpf: cpf, senha: senha };
 
-      salvarCliente(data).then((response) => {
-
-        postFetch('/lib/dp-helper', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-
-
-        if (response) {
-          console.log(response);
-          router.push(Routes.login)
+      salvarCliente(data)
+        .then((response) => response.json())
+        .then((response) => {
+        if (response.ok) {          
+          router.push(Routes.login);
+        } else {
+          alert(response.error);          
         }
       });
-    }else alert(error)
+    } else alert(error);
   }
 
   function apareceSenha() {
@@ -71,7 +64,7 @@ export default function CadastroForm() {
     <div className="bg-gradient-to-r from bg-slate-800  ">
       <div className="h-screen flex items-center justify-center">
         <form
-          onSubmit={enviar}
+          onSubmit={onSubmit}
           className="border-2 border-black bg-home rounded p-10 flex flex-col"
         >
           <div className="mb-2 text-white max-w-inputWidth">Cadastro</div>
@@ -85,7 +78,6 @@ export default function CadastroForm() {
                     className="rounded p-1 text-black mb-2"
                     type="text"
                     placeholder="Nome completo"
-
                   />
                 </td>
               </tr>

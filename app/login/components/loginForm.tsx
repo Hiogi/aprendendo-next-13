@@ -1,5 +1,6 @@
 "use client";
 
+import Input from "@/components/ui/Input/input";
 import { isValidCPF } from "@/lib/utils";
 import React from "react"
 type LoginFormProps = {}; 
@@ -24,7 +25,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
   } 
 
   return(
-    <div className="bg-slate-800 h-screen flex justify-between flex-col items-center">
+    // <div className="bg-slate-800 h-screen flex justify-between flex-col items-center">
+    <div className="flex justify-between flex-col items-center h-screen">
       <div />      
       <div className="border border-gray-600 rounded-lg p-3 bg-gray-700">
         <form onSubmit={onSubmit} className="flex flex-col gap-3">
@@ -37,6 +39,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             <label htmlFor="cpf" className="text-white">Senha</label>
             <input type="text" placeholder="Senha" name="senha" className="p-1 rounded"/>
           </div>
+
+          {/* <Input label="Data Nscimento" name="dtnasc" placeholder="fodac" />  
+          <Input label="kallil" className="bg-red-500 text-xs"/>         */}
 
           <button className="bg-green-800 rounded text-lg p-1 hover:bg-green-600 mt-3">Entrar</button>
         </form>

@@ -1,10 +1,17 @@
 import { DbHelper } from "@/lib/db-helper";
 import prisma from "@/lib/prisma";
+import { isValidCPF } from "@/lib/utils";
+import { ClienteComSenha } from "@/services/cliente.service";
 
 export async function POST(request: Request) {
-  const json = await request.json();
+  const json = await request.json() as ClienteComSenha;
 
+  
   try {
+    if (!isValidCPF(json.cpf)){
+      re
+    }
+
     const cliente = await prisma.$transaction(async (tx) => {
       const criarClient = await tx.cliente.create({
         data: {

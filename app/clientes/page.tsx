@@ -1,5 +1,5 @@
 import React from 'react';
-import CadastroForm from './components/cadastroForm';
+import CadastroForm from '../../components/forms/cadastroForm';
 
 
 
