@@ -1,6 +1,7 @@
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   className?: string;
+  type?: string
 };
 const Input: React.FC<InputProps> = (props) => {
   return (
@@ -11,10 +12,10 @@ const Input: React.FC<InputProps> = (props) => {
         </label>
       }
       <input
-        type="text"
+        type={props.type}
         placeholder={props.placeholder}
         name={props.name}
-        className={`p-1 rounded bg-slate-600 text-white hover:bg-orange-300 ${props.className}`}
+        className={`p-1 rounded bg-slate-600 text-white ${props.className}`}
       />
     </div>
   );

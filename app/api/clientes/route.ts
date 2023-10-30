@@ -2,6 +2,8 @@ import { DbHelper } from "@/lib/db-helper";
 import prisma from "@/lib/prisma";
 import { isValidCPF } from "@/lib/utils";
 import { ClienteComSenha } from "@/services/cliente.service";
+import { StatusCodes } from "http-status-codes";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const json = await request.json() as ClienteComSenha;
@@ -9,7 +11,7 @@ export async function POST(request: Request) {
   
   try {
     if (!isValidCPF(json.cpf)){
-      re
+      return NextResponse.json({ error: 'CPF inválido' }, { status: StatusCodes.BAD_REQUEST });
     }
 
     const cliente = await prisma.$transaction(async (tx) => {
