@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { cookies } from 'next/headers'
 
 export async function POST(request: Request) {
   const json = await request.json();
@@ -14,6 +15,8 @@ export async function POST(request: Request) {
     });
 
     if(user?.senha === json.senha){
+      cookies().set('user', cliente.cpf);    
+      
       return NextResponse.json(cliente);
     }
     return NextResponse.json({ error: 'Acesso negado' }, { status: 401 });

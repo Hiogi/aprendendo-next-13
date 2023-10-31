@@ -3,10 +3,13 @@
 import Button from "@/components/ui/Input/button";
 import Input from "@/components/ui/Input/input";
 import { isValidCPF } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import React from "react";
 type LoginFormProps = {};
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
+  const router = useRouter();
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -20,6 +23,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     if (error != "") {
       alert(error);
     } else {
+
+      router.push('/clientes');
     }
   }
 
@@ -40,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           name="senha" 
           placeholder="Senha" 
           />
-
+          
           <Button 
           placeholder="Enviar" 
           color="bg-green-700 text-white" 
