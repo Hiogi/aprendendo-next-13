@@ -1,4 +1,3 @@
-import prisma from "@/lib/prisma";
 import { executeFetch } from "@/lib/utils";
 import { Prisma } from "@prisma/client";
 

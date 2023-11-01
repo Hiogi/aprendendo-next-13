@@ -1,6 +1,5 @@
-
 import React from 'react';
-import LoginForm from '../../components/forms/loginForm';
+import CadastroForm from '../../../components/forms/cadastroForm';
 
 
 
@@ -9,7 +8,7 @@ type LoginPageProps = {};
 const LoginPage: React.FC<LoginPageProps> = (props) => {
   return (
     <>
-      <LoginForm />
+      <CadastroForm />
     </>
   );
 };

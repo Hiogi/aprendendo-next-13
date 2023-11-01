@@ -6,12 +6,14 @@ import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const json = await request.json() as ClienteComSenha;
+  const json = (await request.json()) as ClienteComSenha;
 
-  
   try {
-    if (!isValidCPF(json.cpf)){
-      return NextResponse.json({ error: 'CPF inválido' }, { status: StatusCodes.BAD_REQUEST });
+    if (!isValidCPF(json.cpf)) {
+      return NextResponse.json(
+        { error: "CPF inválido" },
+        { status: StatusCodes.BAD_REQUEST }
+      );
     }
 
     const cliente = await prisma.$transaction(async (tx) => {
@@ -21,19 +23,23 @@ export async function POST(request: Request) {
           name: json.name,
         },
       });
-  
+
       await tx.user.create({
         data: {
-          clienteId: criarClient.id,
+          cpf: json.cpf,
           senha: json.senha,
         },
       });
-     
+
       return criarClient;
     });
-    
+
     return Response.json(cliente);
   } catch (e) {
-    return DbHelper.handleError(e); 
+    return DbHelper.handleError(e);
   }
+}
+
+export async function GET() {
+  return NextResponse.json(await prisma.cliente.findMany());
 }

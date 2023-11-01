@@ -20,17 +20,14 @@ model Cliente {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User?
 
   @@map("Clientes")
 }
 
 model User {
   id        Int    @id @default(autoincrement())
-  clienteId Int    @unique
+  cpf       String @unique
   senha     String
-
-  cliente Cliente @relation(fields: [clienteId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -1,12 +1,3 @@
-import { TelaDeInicio } from '@/components/telaDeinicio'
-import Image from 'next/image'
+import DashBoardPage from "./(authenticated)/dashboard/page";
 
-export default function Home() {
-  return (
-  <div className='h-screen bg-slate-600'>
-
-    <TelaDeInicio />
-
-  </div>
-  )
-}
+export default DashBoardPage;
