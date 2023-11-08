@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import { ClienteComSenha, salvarCliente } from "../../services/cliente.service";
 import Button from "../ui/Input/button";
 import Input from "../ui/Input/input";
+import { showAlert } from "@/lib/form.utilities";
+import { ShowPosition, ShowType } from "@/types/types";
 type CadastroFormProps = {};
 
 const CadastroForm: React.FC<CadastroFormProps> = (props) => {
@@ -41,23 +43,31 @@ const CadastroForm: React.FC<CadastroFormProps> = (props) => {
       };
 
       salvarCliente(data)
-        .then((response) => {
-          if (!response.ok) {
-            alert(response.statusText);
-            setIsSubmitting(false);
-            return;
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.error) {
+            throw json;
           }
 
-          return response.json();
-        })
-        .then((cliente) => {
-          if (cliente) {
+          if (json) {
             router.push(Routes.login);
           }
+        })
+        .catch((err) => {
+          let errorMsg = 'Erro desconhecido.';
+
+          if (typeof err.error === 'string') {
+            errorMsg = err.error;
+          }
+
+          showAlert(errorMsg, ShowType.Error, ShowPosition.Top, 2200);
+        })
+        .finally(() => {
+          setIsSubmitting(false);
         });
     } else {
       setIsSubmitting(false);
-      alert(error);
+      showAlert(error ,ShowType.Error, ShowPosition.Top, 2200 );
     }
   }
 
@@ -74,19 +84,31 @@ const CadastroForm: React.FC<CadastroFormProps> = (props) => {
       <div />
       <div className="border border-gray-600 rounded-lg p-3 bg-gray-700">
         <form onSubmit={onSubmit} className="flex flex-col gap-3">
-          <Input label="Nome" name="nome" placeholder="Nome Completo" />
-          <Input label="CPF" name="cpf" placeholder="CPF" />
+          <Input
+            label="Nome"
+            name="nome"
+            placeholder="Nome Completo"
+            defaultValue="Oi"
+          />
+          <Input
+            label="CPF"
+            name="cpf"
+            placeholder="CPF"
+            defaultValue="00601320271"
+          />
           <Input
             label="Senha"
             type="password"
             name="senha"
             placeholder="Senha"
+            defaultValue="a"
           />
           <Input
             label="Confirme a senha"
             type="password"
             name="confirmaSenha"
             placeholder="Senha"
+            defaultValue="a"
           />
 
           <Button

@@ -2,7 +2,9 @@
 
 import Button from "@/components/ui/Input/button";
 import Input from "@/components/ui/Input/input";
+import { showAlert } from "@/lib/form.utilities";
 import { isValidCPF } from "@/lib/utils";
+import { ShowPosition, ShowType } from "@/types/types";
 import { useRouter } from "next/navigation";
 import React from "react";
 type LoginFormProps = {};
@@ -21,7 +23,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     if (!isValidCPF(cpf.toString())) error += "CPF inválido\n";
     if (!senha) error += "Informe sua senha\n";
     if (error != "") {
-      alert(error);
+      showAlert(error, ShowType.Error, ShowPosition.Top, 2200)
     } else {
 
       router.push('/clientes');

@@ -12,6 +12,7 @@ const Input: React.FC<InputProps> = (props) => {
         </label>
       }
       <input
+        {...props}
         type={props.type}
         placeholder={props.placeholder}
         name={props.name}
