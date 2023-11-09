@@ -8,6 +8,7 @@ import Button from "../ui/Input/button";
 import Input from "../ui/Input/input";
 import { showAlert } from "@/lib/form.utilities";
 import { ShowPosition, ShowType } from "@/types/types";
+import { formatName, formatNumberOnly } from "@/lib/utilities";
 type CadastroFormProps = {};
 
 const CadastroForm: React.FC<CadastroFormProps> = (props) => {
@@ -29,6 +30,7 @@ const CadastroForm: React.FC<CadastroFormProps> = (props) => {
     );
 
     let error = "";
+    
 
     if (!isValidCPF(cpf.toString())) error += "cpf inválido\n";
     if (!nome) error += "informe seu nome\n";
@@ -37,8 +39,8 @@ const CadastroForm: React.FC<CadastroFormProps> = (props) => {
 
     if (error === "") {
       const data: ClienteComSenha = {
-        name: nome.toString(),
-        cpf: cpf.toString(),
+        name: formatName(nome.toString()),
+        cpf: formatNumberOnly(cpf.toString()),
         senha: senha.toString(),
       };
 
@@ -88,27 +90,23 @@ const CadastroForm: React.FC<CadastroFormProps> = (props) => {
             label="Nome"
             name="nome"
             placeholder="Nome Completo"
-            defaultValue="Oi"
           />
           <Input
             label="CPF"
             name="cpf"
             placeholder="CPF"
-            defaultValue="00601320271"
           />
           <Input
             label="Senha"
             type="password"
             name="senha"
             placeholder="Senha"
-            defaultValue="a"
           />
           <Input
             label="Confirme a senha"
             type="password"
             name="confirmaSenha"
             placeholder="Senha"
-            defaultValue="a"
           />
 
           <Button

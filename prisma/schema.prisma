@@ -27,6 +27,7 @@ model Cliente {
 model User {
   id        Int    @id @default(autoincrement())
   cpf       String @unique
+  name      String
   senha     String
 
   createdAt DateTime @default(now())

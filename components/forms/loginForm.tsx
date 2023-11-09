@@ -2,11 +2,13 @@
 
 import Button from "@/components/ui/Input/button";
 import Input from "@/components/ui/Input/input";
+import { signIn } from  'next-auth/react';
 import { showAlert } from "@/lib/form.utilities";
 import { isValidCPF } from "@/lib/utils";
 import { ShowPosition, ShowType } from "@/types/types";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { formatNumberOnly } from "@/lib/utilities";
 type LoginFormProps = {};
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
@@ -24,11 +26,23 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     if (!senha) error += "Informe sua senha\n";
     if (error != "") {
       showAlert(error, ShowType.Error, ShowPosition.Top, 2200)
-    } else {
-
-      router.push('/clientes');
+      return;
     }
-  }
+
+    const result = await signIn('credentials',{
+      cpf: formatNumberOnly(cpf.toString()),
+      senha,
+      redirect: false
+    });
+
+    if  (result?.error) {
+      showAlert("Acesso Negado", ShowType.Error, ShowPosition.Top,2200)
+      console.log('erro -> ', result);
+      return;
+    }
+      router.replace('/');
+
+    }
 
   return (
     // <div className="bg-slate-800 h-screen flex justify-between flex-col items-center">

@@ -28,6 +28,7 @@ export async function POST(request: Request) {
         data: {
           cpf: json.cpf,
           senha: json.senha,
+          name: json.name,
         },
       });
 
