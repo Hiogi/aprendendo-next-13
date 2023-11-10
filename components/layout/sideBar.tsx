@@ -1,17 +1,24 @@
-import { IconBusinessplan, IconExchange, IconPigMoney, IconUpload } from "@tabler/icons-react";
-import React from "react";
-import ItemSidebar from "./itemSidebar";
+'use client';
+import { IconBusinessplan, IconExchange, IconHome2, IconPigMoney, IconUpload } from "@tabler/icons-react";
+import ItemMenu from "./itemMenu";
+import { signOut, useSession } from "next-auth/react";
+import { formatFirstName } from "@/lib/utilities";
+import LogoutHome from "../logout-page";
 
 export default function SideBar(){
+
+  const { data: session } = useSession();
   
 
   return (
     <>
     <ul className="bg-blue-950 h-screen flex flex-col items-center text-white">
-        <ItemSidebar href="http://localhost:3000/poupanca" nomeLink="Poupança" icone={<IconPigMoney color="pink" />} />          
-        <ItemSidebar href="http://localhost:3000/deposito" nomeLink="Depósito" icone={<IconBusinessplan color="gold" />} />          
-        <ItemSidebar href="http://localhost:3000/saque" nomeLink="Saque" icone={<IconUpload />}/>  
-        <ItemSidebar href="http://localhost:3000/transferir" nomeLink="Transferir" icone={<IconExchange />} />  
+        <ItemMenu href="http://localhost:3000" nomeLink={`Área do ${formatFirstName(session?.user.name?? 'Home')}`} icone={<IconHome2/>}/>
+        <ItemMenu href="http://localhost:3000/poupanca" nomeLink="Poupança" icone={<IconPigMoney color="pink" />} />          
+        <ItemMenu href="http://localhost:3000/deposito" nomeLink="Depósito" icone={<IconBusinessplan color="gold" />} />          
+        <ItemMenu href="http://localhost:3000/saque" nomeLink="Saque" icone={<IconUpload />}/>  
+        <ItemMenu href="http://localhost:3000/transferir" nomeLink="Transferir" icone={<IconExchange />} />  
+        <LogoutHome />
 
     </ul>
     </>

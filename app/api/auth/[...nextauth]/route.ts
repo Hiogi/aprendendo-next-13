@@ -23,9 +23,7 @@ const nextAuthOptions: NextAuthOptions = {
         });
 
         const user = await response.json();
-
-        console.log('API user ->', user)
-
+        
         if (user && response.ok) {         
           return user;
         }
@@ -44,7 +42,7 @@ const nextAuthOptions: NextAuthOptions = {
 			return token
 		},
     async session({ session, token }){
-			session = token.user as any
+			session = token as any
 			return session
 		}
   },  

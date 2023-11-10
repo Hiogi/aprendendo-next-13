@@ -11,13 +11,13 @@ export default function LogoutHome() {
       redirect: false
     })
 
-    router.replace('/auth/login');
+    router.replace('/login');
   }
 
 
   return (
     <>
-      <button onClick={logout} className="p-2 w-40 border border-gray-300 rounded-md">Sair</button>
+      <button onClick={logout} className="p-2 w-40 border border-gray-300 rounded-md mt-3">Sair</button>
     </>
   )
 }

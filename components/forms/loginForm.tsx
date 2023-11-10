@@ -9,6 +9,7 @@ import { ShowPosition, ShowType } from "@/types/types";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { formatNumberOnly } from "@/lib/utilities";
+import ItemMenu from "../layout/itemMenu";
 type LoginFormProps = {};
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
@@ -66,6 +67,10 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           placeholder="Enviar" 
           color="bg-green-700 text-white" 
           />
+
+          <ul>
+            <ItemMenu href="http://localhost:3000/clientes" nomeLink={"Não tem cadastro? Cadastre-se aqui"} className=" "  />
+          </ul>
 
         </form>
       </div>
