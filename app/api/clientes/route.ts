@@ -1,11 +1,32 @@
 import { DbHelper } from "@/lib/db-helper";
 import prisma from "@/lib/prisma";
-import { isValidCPF } from "@/lib/utils";
+import { generateRandomNumber, isValidCPF } from "@/lib/utils";
 import { ClienteComSenha } from "@/services/cliente.service";
+import { PrismaClient } from "@prisma/client";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
+async function geraNumeroDeConta(tx: PrismaClient){
+  let randomAccountNumber: number;
+  let contaExistente = null;
+
+  do {
+    randomAccountNumber = generateRandomNumber();
+    
+    contaExistente = await tx.conta.findUnique({
+      where: { numeroConta: randomAccountNumber },
+    });
+
+  } while (contaExistente);
+
+  return randomAccountNumber;
+}
+
+
+
 export async function POST(request: Request) {
+
+  const saldoInicial = 0;
   const json = (await request.json()) as ClienteComSenha;
 
   try {
@@ -29,6 +50,25 @@ export async function POST(request: Request) {
           cpf: json.cpf,
           senha: json.senha,
           name: json.name,
+        },
+
+      });
+
+     const contaTipo = await tx.tipoConta.create({
+        data: {
+          descricao: 'nova conta',
+        }
+      })
+
+      const numeroConta = await geraNumeroDeConta(tx)
+      
+      await tx.conta.create({
+        data: {
+          numeroConta,
+          saldoConta: saldoInicial,
+          clienteId: criarClient.id, 
+          tipoContaId: contaTipo.id,
+
         },
       });
 

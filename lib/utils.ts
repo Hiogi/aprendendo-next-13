@@ -33,3 +33,11 @@ export function isValidCPF(CPF: string) {
 
   return rest(10) === values[9] && rest(11) === values[10];
 }
+
+export function generateRandomNumber() {
+  const length = 5;
+  const min = 10 ** (length - 1);
+  const max = 10 ** length - 1;
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

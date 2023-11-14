@@ -7,5 +7,6 @@ declare module 'next-auth' {
       senha: string;
       name: string
     }
+
   } 
 }

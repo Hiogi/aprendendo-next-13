@@ -38,7 +38,7 @@ model User {
 
 model Conta {
   id          Int    @id @default(autoincrement())
-  numeroConta String
+  numeroConta Int    @unique
   tipoContaId Int
   saldoConta  Float
   clienteId   Int
