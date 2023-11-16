@@ -12,9 +12,8 @@ export default function SideBar(){
 
   return (
     <>
-    <ul className="bg-blue-950 h-screen flex flex-col items-center text-white">
+    <ul className="bg-blue-950 h-screen w-48 flex flex-col items-center text-white">
         <ItemMenu href="http://localhost:3000" nomeLink={`Área do ${formatFirstName(session?.user.name?? 'Home')}`} icone={<IconHome2/>}/>
-        <ItemMenu href="http://localhost:3000" nomeLink={`Área do ${session?.user.name?? 'Home'}`} icone={<IconHome2/>}/>
         <ItemMenu href="http://localhost:3000/poupanca" nomeLink="Poupança" icone={<IconPigMoney color="pink" />} />          
         <ItemMenu href="http://localhost:3000/deposito" nomeLink="Depósito" icone={<IconBusinessplan color="gold" />} />          
         <ItemMenu href="http://localhost:3000/saque" nomeLink="Saque" icone={<IconUpload />}/>  

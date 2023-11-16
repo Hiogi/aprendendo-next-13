@@ -6,7 +6,8 @@ export default function DashBoardPage() {
   
   return (
     <>
-      <DashboardMenu />
+      {/* <DashboardMenu /> */}
+      oi
     </>
   );
 }

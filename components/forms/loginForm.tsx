@@ -46,7 +46,6 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     }
 
   return (
-    // <div className="bg-slate-800 h-screen flex justify-between flex-col items-center">
     <div className="flex justify-between flex-col items-center h-screen">
       <div />
       <div className="border border-gray-600 rounded-lg p-3 bg-gray-700">

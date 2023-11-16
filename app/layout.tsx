@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={`${inter.className} bg-slate-800 h-screen`}>
+      <body className={`${inter.className} bg-slate-800 h-screen overflow-hidden`}>
         {children}
       </body>
     </html>

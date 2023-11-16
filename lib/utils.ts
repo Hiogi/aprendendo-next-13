@@ -1,7 +1,7 @@
 import { Method } from "@/types/types";
 
 
-export function executeFetch(url: string, method: Method, data: any) {
+export function executeFetch(url: string, method: Method, data?: any) {
   return fetch(url, {
     method: method,
     headers: {
@@ -10,6 +10,18 @@ export function executeFetch(url: string, method: Method, data: any) {
     body: JSON.stringify(data),
   });
 }
+
+export async function getFetch(url: string) {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },    
+  });
+
+  return response.json();
+}
+
 
 export function isValidCPF(CPF: string) {
   if (typeof CPF !== "string") {
