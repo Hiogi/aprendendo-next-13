@@ -87,22 +87,26 @@ const CadastroForm: React.FC<CadastroFormProps> = (props) => {
       <div className="border border-gray-600 rounded-lg p-3 bg-gray-700">
         <form onSubmit={onSubmit} className="flex flex-col gap-3">
           <Input
+            labelClassname="text-white"
             label="Nome"
             name="nome"
             placeholder="Nome Completo"
           />
           <Input
+            labelClassname="text-white"
             label="CPF"
             name="cpf"
             placeholder="CPF"
           />
           <Input
+            labelClassname="text-white"
             label="Senha"
             type="password"
             name="senha"
             placeholder="Senha"
           />
           <Input
+            labelClassname="text-white"
             label="Confirme a senha"
             type="password"
             name="confirmaSenha"

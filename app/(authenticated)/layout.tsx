@@ -24,21 +24,11 @@ export default async function AuthenticatedLayout({ children }: { children: Reac
           <div className='bg-green-500 '> 
             <DashboardMenu/>
           </div>
-          <div className='flex justify-center items-center bg-yellow-500 h-screen '>
+          <div className='flex bg-menu h-screen '>
             {children}
           </div>
         </div>
       </div>
-
-      {/* <div className="flex bg-white ">
-        <DashboardMenu/>
-        <div className="w-1/6  ">
-          <SideBar  />
-        </div>
-        
-
-        <div className="w-screen ">{children}</div>
-      </div> */}
     </NextAuthSessionProvider>
     </>  
   );

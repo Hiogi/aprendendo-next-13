@@ -51,12 +51,14 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
       <div className="border border-gray-600 rounded-lg p-3 bg-gray-700">
         <form onSubmit={onSubmit} className="flex flex-col gap-3">
           <Input 
+          labelClassname="text-white"
           label="CPF" 
           name="cpf" 
           placeholder="CPF" 
           />
 
           <Input 
+          labelClassname="text-white"
           label="Senha" 
           name="senha" 
           placeholder="Senha" 
