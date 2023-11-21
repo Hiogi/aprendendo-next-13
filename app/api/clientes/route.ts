@@ -26,7 +26,7 @@ async function geraNumeroDeConta(tx: PrismaClient){
 
 export async function POST(request: Request) {
 
-  const saldoInicial = 0;
+  const saldoInicial = 1000;
   const json = (await request.json()) as ClienteComSenha;
 
   try {

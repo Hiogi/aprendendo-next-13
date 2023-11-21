@@ -1,9 +1,9 @@
-import DepositoForm from "@/components/forms/depositoForm";
+import TransferenciaForm from "@/components/forms/transferenciaForm";
 
 export default function Deposito(){
   return (
     <>
-      <DepositoForm />
+      <TransferenciaForm />
     </>
   )
 }

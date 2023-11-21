@@ -25,10 +25,10 @@ model Cliente {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  cpf       String @unique
-  name      String
-  senha     String
+  id    Int    @id @default(autoincrement())
+  cpf   String @unique
+  name  String
+  senha String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -37,8 +37,8 @@ model User {
 }
 
 model Conta {
-  id          Int    @id @default(autoincrement())
-  numeroConta Int    @unique
+  id          Int   @id @default(autoincrement())
+  numeroConta Int   @unique
   tipoContaId Int
   saldoConta  Float
   clienteId   Int
@@ -54,9 +54,12 @@ model Conta {
 }
 
 model Transacao {
-  id      Int   @id @default(autoincrement())
-  contaId Int
-  conta   Conta @relation(fields: [contaId], references: [id])
+  id             Int     @id @default(autoincrement())
+  contaId        Int
+  conta          Conta   @relation(fields: [contaId], references: [id])
+  contaDestinoId String?
+  valor          Decimal
+  tipoTransacao  String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

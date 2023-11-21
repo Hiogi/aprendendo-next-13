@@ -1,4 +1,4 @@
-export type Method = 'get' | 'post' | 'delete' | 'update';
+export type Method = 'get' | 'post' | 'delete' | 'update' | 'put' | 'patch';
 
 export enum ShowType {
   Error = "error",

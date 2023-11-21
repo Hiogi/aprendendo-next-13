@@ -1,0 +1,1 @@
+export type TransacaoTipo = 'DEPOSITO' | 'SAQUE' | 'PIX' | 'TRANSFERENCIA';
