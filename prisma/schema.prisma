@@ -58,7 +58,7 @@ model Transacao {
   contaId        Int
   conta          Conta   @relation(fields: [contaId], references: [id])
   contaDestinoId String?
-  valor          Decimal
+  valor          Float
   tipoTransacao  String
 
   createdAt DateTime @default(now())
