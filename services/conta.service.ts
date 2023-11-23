@@ -1,5 +1,4 @@
-import { executeFetch, getFetch } from "@/lib/utils";
-import { Conta } from "@prisma/client";
+import { getFetch } from "@/lib/utils";
 
 export async function getConta(){
   return await getFetch('/api/conta');
