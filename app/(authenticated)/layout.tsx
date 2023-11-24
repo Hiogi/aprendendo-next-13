@@ -1,13 +1,11 @@
-import TopBarMenu from '@/components/layout/topBarMenu';
+import { ContaProvider } from '@/components/contaProvider';
 import SideBar from '@/components/layout/sideBar';
+import TopBarMenu from '@/components/layout/topBarMenu';
 import NextAuthSessionProvider from '@/providers/sessionProvider';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { nextAuthOptions } from "../api/auth/[...nextauth]/route";
 import React from 'react';
-import { Conta } from '@prisma/client';
-import { getConta } from '@/services/conta.service';
-import { ContaProvider } from '@/components/contaProvider';
+import { nextAuthOptions } from "../api/auth/[...nextauth]/route";
 
 export default async function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   const sessao = await getServerSession(nextAuthOptions);

@@ -1,6 +1,5 @@
 'use client';
 
-import { Conta } from "@prisma/client";
 import { IconEye, IconEyeOff } from "@tabler/icons-react";
 import React, { useState } from "react";
 import { ContaContext } from "../contaProvider";
@@ -17,7 +16,6 @@ export default function TopBarMenu() {
     const apareceSaldo = conta.saldoConta;
 
     function onClick() {
-      console.log(icon);
       
       if (React.isValidElement(icon) && React.isValidElement(<IconEye />)) {
         if (icon.type === IconEye) {
