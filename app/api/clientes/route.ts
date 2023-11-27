@@ -2,7 +2,7 @@ import { DbHelper } from "@/lib/db-helper";
 import prisma from "@/lib/prisma";
 import { generateRandomNumber, isValidCPF } from "@/lib/utils";
 import { ClienteComSenha } from "@/services/cliente.service";
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 

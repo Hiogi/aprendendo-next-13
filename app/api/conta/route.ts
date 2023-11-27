@@ -3,6 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
 
-  return NextResponse.json(await prisma.conta.findFirst());
+  return NextResponse.json(await prisma.conta.findMany());
   
 };

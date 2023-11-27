@@ -13,7 +13,6 @@ export default function TopBarMenu() {
 
   const clientData = React.useMemo(() =>{
     if (conta === undefined) return '';
-    const apareceSaldo = conta.saldoConta;
 
     function onClick() {
       

@@ -59,6 +59,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
           <Input 
           labelClassname="text-white"
+          type="password"
           label="Senha" 
           name="senha" 
           placeholder="Senha" 

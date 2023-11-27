@@ -46,7 +46,7 @@ const TransferenciaForm: React.FC<depositoProps> = (props) => {
           <Input placeholder="Digite o valor" className="p-2" name="valor" required/>
         </div>
         <div className="ml-2 font-bold">
-          <select name="opcoes" id="">
+          <select name="opcoes" id="" className="rounded py-1 bg-slate-600 ml-[117px]">
             <option value="DEPOSITO">Depósito</option>
             <option value="SAQUE">Saque</option>
             <option value="TRANSFERENCIA">Transferência</option>
