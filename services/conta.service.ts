@@ -1,5 +1,5 @@
-import { getFetch } from "@/lib/utils";
+import { executeFetch, getFetch } from "@/lib/utils";
 
 export async function getConta(){
-  return await getFetch('/api/conta');
+  return await executeFetch('/api/conta', 'get');
 }
