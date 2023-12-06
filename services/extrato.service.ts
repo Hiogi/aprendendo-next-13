@@ -1,5 +1,5 @@
-import { getFetch } from "@/lib/utils";
+import prisma from "@/lib/prisma";
 
 export async function getExtrato() {
-  return await getFetch('http://localhost:3000/api/conta');
+  return prisma.transacao.findMany();
 }

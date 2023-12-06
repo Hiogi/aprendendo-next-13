@@ -24,7 +24,7 @@ export function ContaProvider({children}: ContaProviderProps) {
   const loadContas = React.useCallback(() => {
     
     getConta()
-      // .then(response => response.json())
+      .then(response => response.json())
       .then(conta => setConta(conta));
   },[]);
 
@@ -38,6 +38,8 @@ export function ContaProvider({children}: ContaProviderProps) {
     conta,
     loadContas,
   };
+
+  console.log(conta)
 
   return (
     <ContaContext.Provider value={controls}>
