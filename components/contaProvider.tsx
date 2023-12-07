@@ -10,36 +10,33 @@ type ContaProviderProps = {
 
 export type ContaContextControls = {
   conta: Conta | undefined;
-  loadContas: () => void;
+  loadContas: (numeroConta: number) => void;
 };
 
 export const ContaContext = React.createContext<ContaContextControls>({
   conta: undefined,
-  loadContas: () => {},
+  loadContas: (numeroConta: number) => {},
 });
 
 export function ContaProvider({children}: ContaProviderProps) {
   const [conta, setConta] = React.useState<Conta>();
 
-  const loadContas = React.useCallback(() => {
-    
-    getConta()
+  const loadContas = React.useCallback((numeroConta: number) => {
+    getConta(numeroConta)
       .then(response => response.json())
       .then(conta => setConta(conta));
   },[]);
 
-  React.useEffect(() => {
-    if(conta === undefined){
-      loadContas();
-    }
-  }, [loadContas, conta]);
+  // React.useEffect(() => {
+  //   if(conta === undefined){
+  //     loadContas();
+  //   }
+  // }, [loadContas, conta]);
 
   const controls = {
     conta,
     loadContas,
   };
-
-  console.log(conta)
 
   return (
     <ContaContext.Provider value={controls}>

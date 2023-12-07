@@ -53,6 +53,7 @@ const CadastroForm: React.FC<CadastroFormProps> = (props) => {
 
           if (json) {
             router.push(Routes.login);
+            showAlert('Cadastro realizado com sucesso', ShowType.Success, ShowPosition.Top, 2200)
           }
         })
         .catch((err) => {

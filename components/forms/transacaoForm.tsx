@@ -40,7 +40,7 @@ const TransferenciaForm: React.FC<depositoProps> = (props) => {
 
   return (
     <>
-    <div className="flex flex-col items-center justify-center w-full ">
+    <div className="flex flex-col items-center justify-center w-full h-full ">
       <form onSubmit={onSubmit}>
         <div className="mb-2">
           <Input placeholder="Digite o valor" className="p-2" name="valor" required/>

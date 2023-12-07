@@ -19,14 +19,14 @@ export default async function AuthenticatedLayout({ children }: { children: Reac
     <NextAuthSessionProvider>
       <ContaProvider>
         <div className='flex h-screen w-screen'>
-          <div className='bg-red-500 w-48'>
+          <div className='bg-red-500'>
             <SideBar/>
           </div>
-          <div className='w-screen'>
+          <div className='grow flex flex-col'>
             <div className='bg-green-500 '> 
               <TopBarMenu />
             </div>
-            <div className='flex bg-menu h-full w-full'>
+            <div className='grow overflow-auto p-4'>
               {children}
             </div>
           </div>
