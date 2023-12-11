@@ -1,5 +1,5 @@
-import prisma from "@/lib/prisma";
+import { executeFetch } from "@/lib/utils";
 
-export async function getExtrato() {
-  return prisma.transacao.findMany();
+export async function getExtrato(idCliente: number) {
+  return await executeFetch('http://localhost:3000/api/extrato/' + idCliente, 'get');
 }

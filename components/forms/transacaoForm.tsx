@@ -7,6 +7,8 @@ import Button from "../ui/Input/button";
 import Input from "../ui/Input/input";
 import { createTransacao } from "@/services/transacao.service";
 import { ContaContext } from "../contaProvider";
+import { showAlert } from "@/lib/form.utilities";
+import { ShowPosition, ShowType } from "@/types/types";
 
 type depositoProps = {};
 
@@ -36,6 +38,7 @@ const TransferenciaForm: React.FC<depositoProps> = (props) => {
     });
 
     loadContas();
+    showAlert(opcoes.toLowerCase() + ' realizado com sucesso',ShowType.Success,ShowPosition.Top, 2200);
   };
 
   return (
@@ -62,7 +65,5 @@ const TransferenciaForm: React.FC<depositoProps> = (props) => {
     </>
   )
 }
-
-
 
 export default React.memo(TransferenciaForm);
