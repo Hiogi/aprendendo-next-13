@@ -37,7 +37,7 @@ const TransferenciaForm: React.FC<depositoProps> = (props) => {
       tipoTransacao: opcoes as TransacaoTipo,
     });
 
-    loadContas();
+    loadContas(Number(conta?.clienteId));
     showAlert(opcoes.toLowerCase() + ' realizado com sucesso',ShowType.Success,ShowPosition.Top, 2200);
   };
 

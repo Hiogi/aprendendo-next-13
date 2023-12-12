@@ -3,10 +3,11 @@ import prisma from "@/lib/prisma";
 import { generateRandomNumber, isValidCPF } from "@/lib/utils";
 import { ClienteComSenha } from "@/services/cliente.service";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { DefaultArgs } from "@prisma/client/runtime/library";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
-async function geraNumeroDeConta(tx: PrismaClient){
+async function geraNumeroDeConta(tx: Omit<PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">){
   let randomAccountNumber: number;
   let contaExistente = null;
 
@@ -60,7 +61,7 @@ export async function POST(request: Request) {
         }
       })
 
-      const numeroConta = await geraNumeroDeConta(tx)
+      const numeroConta = await geraNumeroDeConta(tx);
       
       await tx.conta.create({
         data: {
