@@ -52,7 +52,6 @@ export async function POST(request: Request) {
           senha: json.senha,
           name: json.name,
         },
-
       });
 
      const contaTipo = await tx.tipoConta.create({

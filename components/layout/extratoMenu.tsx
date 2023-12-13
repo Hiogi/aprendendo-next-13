@@ -4,9 +4,9 @@ import { getServerSession } from "next-auth"
 
 export default async function ExtratoMenu() {
   
-  const session = await getServerSession(nextAuthOptions)
-  
-  const extrato = await getExtrato(Number(session?.user.id));
+  const session = await getServerSession(nextAuthOptions);
+  const response = await getExtrato(Number(session?.user.id));
+  const extrato = await response.json();  
   
   return (
     <>
@@ -14,7 +14,7 @@ export default async function ExtratoMenu() {
         <div className="flex justify-center">
           <table>
             <tbody>
-              {extrato.map((transacoes) => (
+              {extrato.map((transacoes: any) => (
                 <tr key={transacoes.contaId} className="border-2 border- rounded flex flex-col mb-2 bg-[#c29661] font-semibold text-black">
                   <td className="pl-1 pr-2 py-2 mb-">{transacoes.contaId}</td>
                   <td className="pl-1 pr-2 py-2">R$: {transacoes.valor}</td>
