@@ -8,11 +8,11 @@ import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
 async function geraNumeroDeConta(tx: Omit<PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">){
-  let randomAccountNumber: number;
+  let randomAccountNumber: string;
   let contaExistente = null;
 
   do {
-    randomAccountNumber = generateRandomNumber();
+    randomAccountNumber = generateRandomNumber().toString();
     
     contaExistente = await tx.conta.findUnique({
       where: { numeroConta: randomAccountNumber },
@@ -20,7 +20,7 @@ async function geraNumeroDeConta(tx: Omit<PrismaClient<Prisma.PrismaClientOption
 
   } while (contaExistente);
 
-  return randomAccountNumber;
+  return randomAccountNumber.toString();
 }
 
 
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
 
      const contaTipo = await tx.tipoConta.create({
         data: {
-          descricao: 'nova conta',
+          descricao: 'Conta-corrente',
         }
       })
 
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       
       await tx.conta.create({
         data: {
-          numeroConta,
+          numeroConta: numeroConta + ' -' + ' 001',
           saldoConta: saldoInicial,
           clienteId: criarClient.id, 
           tipoContaId: contaTipo.id,
