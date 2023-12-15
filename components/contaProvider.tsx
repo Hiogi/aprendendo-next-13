@@ -3,7 +3,6 @@
 import { getConta } from "@/services/conta.service";
 import { Conta } from "@prisma/client";
 import React from "react";
-import { useSession } from "next-auth/react";
 
 type ContaProviderProps = {
   children: React.ReactNode;

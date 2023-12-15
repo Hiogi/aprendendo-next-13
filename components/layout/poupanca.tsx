@@ -1,7 +1,16 @@
+import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
 import { criaPoupanca } from "@/services/poupanca.service"
+import { getServerSession } from "next-auth";
 
-export default function PoupancaMenu() {
+export default async function PoupancaMenu() {
 
+  const session = await getServerSession(nextAuthOptions);
+  const idCliente = await criaPoupanca(Number(session?.user.id));
+
+
+  return console.log('AQUI ==> ' + idCliente);
+  
+  
 
   return (
     <>
