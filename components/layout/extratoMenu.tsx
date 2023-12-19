@@ -15,7 +15,7 @@ export default async function ExtratoMenu() {
           <table>
             <tbody>
               {extrato.map((transacoes: any) => (
-                <tr key={transacoes.contaId} className="border-2 border- rounded flex flex-col mb-2 bg-[#c29661] font-semibold text-black">
+                <tr key={transacoes.contaId} className="border-2 border-black rounded flex flex-col mb-2 bg-[#c29661] font-semibold text-black">
                   <td className="pl-1 pr-2 py-2 mb-">{transacoes.contaId}</td>
                   <td className="pl-1 pr-2 py-2">R$: {transacoes.valor}</td>
                   <td className="pl-1 pr-2 py-2">Ação: {transacoes.tipoTransacao}</td>

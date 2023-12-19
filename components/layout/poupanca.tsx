@@ -6,9 +6,7 @@ export default async function PoupancaMenu() {
 
   const session = await getServerSession(nextAuthOptions);
   const idCliente = await criaPoupanca(Number(session?.user.id));
-
-
-  return console.log('AQUI ==> ' + idCliente);
+  console.log('AQUI IDCLIENTE ==> ' + idCliente.json());
   
   
 
